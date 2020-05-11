@@ -29,12 +29,12 @@ public class Load implements IMenuItem {
 
     @Override
     public void execute() throws Exception {
-        if (new File("src/lab3/Clothes/ClothesGenericSave").exists()) {//если файл существует,то дальше читаем его:
-            FileReader clothesFile = new FileReader("src/lab3/Clothes/ClothesGenericSave");
+        if (new File("C:\\Users\\laptop\\IdeaProjects\\ProjectClothes\\src\\Clothes\\NotSimpleMenu\\ClothesSave").exists()) {//если файл существует,то дальше читаем его:
+            FileReader clothesFile = new FileReader("C:\\Users\\laptop\\IdeaProjects\\ProjectClothes\\src\\Clothes\\NotSimpleMenu\\ClothesSave");
             Scanner scanner = new Scanner(clothesFile);
             int i = 1;
             while (scanner.hasNextLine()) {
-                String myfile = "src/lab3/Clothes/ClothesGenericSave";
+                String myfile = "C:\\Users\\laptop\\IdeaProjects\\ProjectClothes\\src\\Clothes\\NotSimpleMenu\\ClothesSave";
                 String[] split = myfile.split(", ");
                 //for(int i = 0; i< split.length;i++)
                 {
