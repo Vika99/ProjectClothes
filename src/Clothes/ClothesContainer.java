@@ -1,6 +1,6 @@
 package Clothes;
 
-public class ClothesContainer implements Runnable {
+public  class ClothesContainer  {
     private Clothes[] array = new Clothes[10];
     private int count = 0;
     public int i = 0;
@@ -47,20 +47,22 @@ public class ClothesContainer implements Runnable {
         }
 
     }
+}
 
 
-    @Override
+    /*@Override
     public void run() {
         System.out.println("My thread " + Thread.currentThread().getId() + " is getting " + i++);//попробуем посмотреть изменения переменной i
 
-        /*for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 5; i++) {
             try {
                 // Приостанавливаем поток
                 Thread.sleep(1000);
                 System.out.println("Thread ");
             }catch(InterruptedException e){}
-        */
+
     }
+
 
         public static void main (String[]args){
             ClothesContainer myMultithread = new ClothesContainer(); //создаем экземпляр нашего класса
@@ -70,4 +72,4 @@ public class ClothesContainer implements Runnable {
 
 
         }
-    }
+    }*/
