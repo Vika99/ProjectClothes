@@ -1,6 +1,8 @@
 package Clothes;
 
-public class Clothes implements Comparable<Clothes>{
+import java.io.Serializable;
+
+public abstract class Clothes <E extends Clothes<E>>implements Comparable<Clothes<?>>, Serializable {
         private int price;
         private String material;
         private int size;
