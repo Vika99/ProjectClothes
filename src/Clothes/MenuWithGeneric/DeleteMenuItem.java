@@ -1,17 +1,18 @@
+
 package Clothes.MenuWithGeneric;
 
-import Clothes.Clothes;
+
 import Clothes.NotSimpleMenu.Container;
-import Clothes.NotSimpleMenu.LocalContainer;
+
 
 import java.util.Scanner;
 
 public class DeleteMenuItem <T> implements MenuItem<T>{
-    private LocalContainer<T> container;
+    private Container<T> container;
     private Scanner sc = new Scanner(System.in);
 
-    public DeleteMenuItem(Container<Clothes<?>> container) {
-        this.container = (LocalContainer<T>) container;
+    public DeleteMenuItem(Container<T> container) {
+        this.container = container;
     }
 
     @Override
