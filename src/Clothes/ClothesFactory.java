@@ -27,6 +27,7 @@ public class ClothesFactory implements Factory<Clothes> {
             jeans.setWaist(waist);
             result = jeans;
         }
+
         System.out.println("Input Clothes color");
         String color = sc.nextLine();
         result.setColor(color);

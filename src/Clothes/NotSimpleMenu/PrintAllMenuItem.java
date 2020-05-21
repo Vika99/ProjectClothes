@@ -1,6 +1,7 @@
 package Clothes.NotSimpleMenu;
 
 import Clothes.ClothesContainer;
+import Clothes.NotSimpleMenu.IMenuItem;
 
 public class PrintAllMenuItem implements IMenuItem {
 
