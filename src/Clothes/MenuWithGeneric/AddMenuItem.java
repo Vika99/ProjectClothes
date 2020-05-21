@@ -1,12 +1,16 @@
 package Clothes.MenuWithGeneric;
 
+import Clothes.Clothes;
+import Clothes.NotSimpleMenu.Container;
+import Clothes.NotSimpleMenu.LocalContainer;
+
 public class AddMenuItem  <T>implements MenuItem <T>{
-    private GenericContainer<T> container;
+    private LocalContainer<T> container;
     private Factory<T> factory;
 
-    public AddMenuItem(GenericContainer<T> container, Factory<T> factory) {
-        this.container = container;
-        this.factory = factory;
+    public AddMenuItem(Container<Clothes<?>> container, Factory<Clothes> factory) {
+        this.container = (LocalContainer<T>) container;
+        this.factory = (Factory<T>) factory;
     }
 
     @Override

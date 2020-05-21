@@ -2,18 +2,25 @@ package Clothes.MenuWithGeneric;
 
 import Clothes.Clothes;
 import Clothes.ClothesFactory;
+import Clothes.Network.NetworkClientContainer;
+import Clothes.NotSimpleMenu.Container;
+
+
+import java.io.IOException;
 
 public class MainMenuGeneric {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
     Factory<Clothes> factory= new ClothesFactory();
-    GenericContainer<Clothes> container = new GenericContainer<>();
+    Container<Clothes<?>> container = new NetworkClientContainer<Clothes<?>>("localhost",8080);
+
 
     // Создаем верхнеуровн. меню!
-    MenuItem<Clothes>[] items= new MenuItem[3];
-    items[0]=  new AddMenuItem<>(container, factory);
-    items[1] = new DeleteMenuItem<>(container);
-    items[2] = new PrintAll<>(container);
-    TopLevelMenu<Clothes> clothesMenu = new TopLevelMenu<>(items, "clothes menu", 0);
+    MenuItem<Clothes<?>>[] items= new MenuItem[3];
+    items[0]=  new AddMenuItem<Clothes<?>>(container, factory);
+    items[1] = new DeleteMenuItem<Clothes<?>>(container);
+
+    items[2] = new PrintAll<Clothes<?>>(container);
+    TopLevelMenu<Clothes<?>> clothesMenu = new TopLevelMenu<>(items, "clothes menu", 0);
     clothesMenu.execute();
 }
 }

@@ -1,10 +1,17 @@
 package Clothes.MenuWithGeneric;
 
-public class PrintAll <T> implements MenuItem<T> {
-    private GenericContainer<T> container;
+import Clothes.Clothes;
+import Clothes.MenuWithGeneric.MenuItem;
+import Clothes.NotSimpleMenu.Container;
+import Clothes.NotSimpleMenu.LocalContainer;
 
-    public PrintAll(GenericContainer<T> container) {
-        this.container = container;
+public class PrintAll <T extends Comparable<T>> implements MenuItem<T> {
+    private LocalContainer<T> container;
+
+    public PrintAll(Container<Clothes<?>> container)
+
+    {
+        this.container = (LocalContainer<T>) container;
     }
 
     @Override

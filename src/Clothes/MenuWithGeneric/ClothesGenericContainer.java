@@ -4,7 +4,7 @@ import Clothes.Clothes;
 
 import java.util.Arrays;
 
-public class ClothesGenericContainer <T extends Comparable<T>> {
+public  class ClothesGenericContainer <T extends Comparable<T>> {
     private T[] array = (T[]) new Object[10];
     private int count = 0;
 
@@ -44,4 +44,5 @@ public class ClothesGenericContainer <T extends Comparable<T>> {
     public void averagePrice() {
 
     }
+
 }
