@@ -1,6 +1,7 @@
 package Clothes.Network;
 
 import Clothes.Clothes;
+import Clothes.NotSimpleMenu.ScannerWrapper;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -18,7 +19,6 @@ public class ServerContainer {
 
 
     public static void main(String[] args) throws IOException {
-
         executorService = Executors.newCachedThreadPool();
         ServerSocket serverSocket = new ServerSocket(8080);
 
@@ -36,30 +36,29 @@ public class ServerContainer {
     private static void process(Socket socket) {    // Будет обрабатывать отдельно каждое новое соединение
 
 
-        executorService.submit(new Runnable() {   // Как только новое соединение мы отправляем новую задачу на выполнение
-            @Override
-            public void run() {
+        // Как только новое соединение мы отправляем новую задачу на выполнение
+        executorService.submit(() -> {
 
-                try {
-                    ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-                    ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-                    System.out.println("Ready to communicate");
+            try {
+                ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+                ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+                System.out.println("Ready to communicate");
 
 
-                    while (true) {
-                        communicate(ois, oos);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+                while (true) {
+                    communicate(ois, oos);
+
                 }
-
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
+
         });
     }
 
-    private static void communicate(ObjectInputStream ois, ObjectOutputStream out) throws IOException, ClassNotFoundException {    //Отвечает за взаимодействие
+    private static void communicate(ObjectInputStream ois, ObjectOutputStream out) throws IOException, ClassNotFoundException, InterruptedException {    //Отвечает за взаимодействие
 
         Request request = (Request) ois.readObject();
         System.out.println(request);
@@ -72,46 +71,34 @@ public class ServerContainer {
                 break;
             }
 
-            case GET: {
-                Response response = new Response(list);
-                ObjectOutputStream oos = new ObjectOutputStream(out);
-                oos.writeObject(response);
-                oos.flush();
-            }
-
-        }
-
-        switch (request.getType()) {
-            case ADD: {
-                Clothes<?> index = (Clothes<?>) request.getPayload();
-                list.remove(index);
+            case SET: {
+                int index =  list.indexOf((Clothes<?>) request.getPayload());
+                Clothes<?> element = (Clothes<?>) request.getPayload();
+                list.set(index, element);
                 break;
             }
+            case DELETE:
+                int index = list.indexOf((Clothes<?>) request.getPayload());
+                list.remove(index);
 
+                break;
             case GET: {
                 Response response = new Response(list);
+                for( Clothes<?> clothes:list){
+                    Thread.sleep(1_000);
+                    System.out.println(clothes);
+                }
                 ObjectOutputStream oos = new ObjectOutputStream(out);
                 oos.writeObject(response);
                 oos.flush();
+
             }
 
+
+            }
         }
 
-        /*switch (request.getType()) {
-            case ADD: {
-                Clothes<?> elementlist = (Clothes<?>) request.getPayload();
-                list.set(elementlist);
 
-            }
-            case GET: {
-                Response response = new Response(list);
-                ObjectOutputStream oos = new ObjectOutputStream(out);
-                oos.writeObject(response);
-                oos.flush();
-            }
-        }
-    }*/
 
 
     }
-}
