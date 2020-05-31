@@ -33,7 +33,7 @@ public class NetworkClientContainer <T extends Serializable> implements Containe
     public void add(T element) {
         Request request = new Request(Type.ADD, element.toString());// Создаем объект запроса
 
-        try{
+        try {
             oos.writeObject(request);
             oos.flush();
         } catch (IOException e) {
@@ -43,35 +43,35 @@ public class NetworkClientContainer <T extends Serializable> implements Containe
 
     }
 
-     public void set (int index, T element){
-
-     }
-    /*@Override
     public void set(int index, T element) {
-        Request request1 = new Request(Type.ADD, index & element.toString());
+         PayLoad payLoad = new PayLoad();
+        Request request = new Request(Type.SET, payLoad);
         try {
-            oos.writeObject(request1);
+            oos.writeObject(request);
             oos.flush();
         } catch (IOException e) {
             e.printStackTrace();
-            {
-            }
         }
 
     }
-*/
 
     @Override
     public void delete(int index) {
-        Request request2 = new Request(Type.ADD, index);// Создаем объект запроса
 
-        try{
-            oos.writeObject(request2);
+        Request request = new Request(Type.DELETE, index);
+        try {
+            oos.writeObject(request);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
             oos.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 
 
     @Override
