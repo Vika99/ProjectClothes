@@ -44,8 +44,7 @@ public class NetworkClientContainer <T extends Serializable> implements Containe
     }
 
     public void set(int index, T element) {
-         PayLoad payLoad = new PayLoad();
-        Request request = new Request(Type.SET, payLoad);
+        Request request = new Request(Type.SET, new PayLoad(index,element)); // new Payload это мы создаем класс-обертку
         try {
             oos.writeObject(request);
             oos.flush();
@@ -90,9 +89,7 @@ public class NetworkClientContainer <T extends Serializable> implements Containe
             return (Collection<T>)response.getPayload();
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return Collections.emptyList();// ВЕРНЕМ ПУСТОЙ ЛИСТ
