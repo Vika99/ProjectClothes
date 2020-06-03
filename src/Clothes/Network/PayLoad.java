@@ -3,21 +3,27 @@ package Clothes.Network;
 import java.io.Serializable;
 
 public class PayLoad implements Serializable {
-    int index;
-    String element;
+    private int index;
+   private Serializable element;
 
-    public PayLoad() {
+    public PayLoad(int index, Serializable element) {
         this.index = index;
         this.element=element;
     }
 
-
+    public void setIndex(int index) {
+        this.index = index;
+    }
 
     public int getIndex() {
         return index;
     }
 
-    public String getElement() {
+    public void setElement(Serializable element) {
+        this.element = element;
+    }
+
+    public Serializable getElement() {
         return element;
     }
 }
