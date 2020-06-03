@@ -72,16 +72,16 @@ public class ServerContainer {
             }
 
             case SET: {
-                int index =  list.indexOf((Clothes<?>) request.getPayload());
-                Clothes<?> element = (Clothes<?>) request.getPayload();
-                list.set(index, element);
+                PayLoad updateData = (PayLoad)request.getPayload();
+                Clothes<?> element =( Clothes<?>) updateData.getElement();
+                list.set(updateData.getIndex(), element);
                 break;
             }
             case DELETE:
-                int index = list.indexOf((Clothes<?>) request.getPayload());
+                int index = (Integer) request.getPayload();
                 list.remove(index);
-
                 break;
+
             case GET: {
                 Response response = new Response(list);
                 for( Clothes<?> clothes:list){
@@ -91,7 +91,7 @@ public class ServerContainer {
                 ObjectOutputStream oos = new ObjectOutputStream(out);
                 oos.writeObject(response);
                 oos.flush();
-
+                break;
             }
 
 
