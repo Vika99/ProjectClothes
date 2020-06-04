@@ -1,2 +1,5 @@
+
  Jeans jeans = new Jeans(30,34,"qweasd","black",90);
-        Tshirt tshirt=new Tshirt(25,34,"ertd","red",80);
+=======
+ Jeans jeans = new Jeans(30,34,"qweasd","black",90);
+"red",80);

@@ -1,3 +1,4 @@
+
 package Clothes.MenuWithGeneric;
 
 import java.util.Arrays;
@@ -54,5 +55,3 @@ public  class GenericContainer<T>  {
         return count;
     }
 }
-
-

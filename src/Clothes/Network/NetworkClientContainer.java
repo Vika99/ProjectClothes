@@ -33,7 +33,7 @@ public class NetworkClientContainer <T extends Serializable> implements Containe
     public void add(T element) {
         Request request = new Request(Type.ADD, element.toString());// Создаем объект запроса
 
-        try{
+        try {
             oos.writeObject(request);
             oos.flush();
         } catch (IOException e) {
@@ -43,35 +43,34 @@ public class NetworkClientContainer <T extends Serializable> implements Containe
 
     }
 
-     public void set (int index, T element){
-
-     }
-    /*@Override
     public void set(int index, T element) {
-        Request request1 = new Request(Type.ADD, index & element.toString());
+        Request request = new Request(Type.SET, new PayLoad(index,element)); // new Payload это мы создаем класс-обертку
         try {
-            oos.writeObject(request1);
+            oos.writeObject(request);
             oos.flush();
         } catch (IOException e) {
             e.printStackTrace();
-            {
-            }
         }
 
     }
-*/
 
     @Override
     public void delete(int index) {
-        Request request2 = new Request(Type.ADD, index);// Создаем объект запроса
 
-        try{
-            oos.writeObject(request2);
+        Request request = new Request(Type.DELETE, index);
+        try {
+            oos.writeObject(request);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
             oos.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 
 
     @Override
@@ -90,9 +89,7 @@ public class NetworkClientContainer <T extends Serializable> implements Containe
             return (Collection<T>)response.getPayload();
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return Collections.emptyList();// ВЕРНЕМ ПУСТОЙ ЛИСТ

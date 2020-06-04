@@ -1,3 +1,4 @@
+
 package Clothes;
 
 public  class ClothesContainer  {
@@ -53,23 +54,17 @@ public  class ClothesContainer  {
     /*@Override
     public void run() {
         System.out.println("My thread " + Thread.currentThread().getId() + " is getting " + i++);//попробуем посмотреть изменения переменной i
-
         for(int i = 0; i < 5; i++) {
             try {
                 // Приостанавливаем поток
                 Thread.sleep(1000);
                 System.out.println("Thread ");
             }catch(InterruptedException e){}
-
     }
-
-
         public static void main (String[]args){
             ClothesContainer myMultithread = new ClothesContainer(); //создаем экземпляр нашего класса
             new Thread(myMultithread).start();//создаем первый поток и одновременно запускаем его
             new Thread(myMultithread).start();//второй
             new Thread(myMultithread).start();//третий !!! порядок потоков в методе вовсе не означает, что они выполняться в таком порядке
-
-
         }
     }*/

@@ -1,17 +1,20 @@
+
 package Clothes;
 
 import Clothes.MenuWithGeneric.Factory;
+import Clothes.NotSimpleMenu.ScannerWrapper;
 
 import java.util.Scanner;
 
-public class ClothesFactory implements Factory<Clothes> {
-    private Scanner sc = new Scanner(System.in);
-    public Clothes create() {
+public class ClothesFactory implements Factory<Clothes<?>> {
+    //private Scanner sc = new Scanner(System.in);
+    private ScannerWrapper sc = new ScannerWrapper();
+    public Clothes<?> create() {
         System.out.println("1-create Tshirt");
         System.out.println("2-create Jeans");
 
         int choice = sc.nextInt();
-        Clothes result;
+        Clothes<?>result;
         //Внешняя переменная и в конце мы ее вернем и в ветках пишем result=..
         if (choice ==1){
             Tshirt tshirt = new Tshirt();
