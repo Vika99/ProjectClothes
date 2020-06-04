@@ -8,6 +8,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -15,7 +16,7 @@ import java.util.concurrent.Executors;
 public class ServerContainer {
 
     private static ExecutorService executorService;
-    private static ArrayList<Clothes<?>> list = new ArrayList<>();
+    private static CopyOnWriteArrayList<Clothes<?>> list = new CopyOnWriteArrayList<>();
 
 
     public static void main(String[] args) throws IOException {
@@ -83,7 +84,7 @@ public class ServerContainer {
                 break;
 
             case GET: {
-                Response response = new Response(list);
+                Response response = new Response(new ArrayList<>(list));
                 for( Clothes<?> clothes:list){
                     Thread.sleep(1_000);
                     System.out.println(clothes);
