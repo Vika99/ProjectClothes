@@ -14,7 +14,7 @@ public class ClothesFactory implements Factory<Clothes<?>> {
         System.out.println("2-create Jeans");
 
         int choice = sc.nextInt();
-        Clothes<?>result;
+        Clothes result;
         //Внешняя переменная и в конце мы ее вернем и в ветках пишем result=..
         if (choice ==1){
             Tshirt tshirt = new Tshirt();

@@ -57,7 +57,8 @@ public class ServerContainer {
             }
 
         });
-    }
+}
+
 
     private static void communicate(ObjectInputStream ois, ObjectOutputStream out) throws IOException, ClassNotFoundException, InterruptedException {    //Отвечает за взаимодействие
 
