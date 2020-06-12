@@ -3,34 +3,28 @@ package Clothes.MenuWithGeneric;
 import Clothes.Jeans;
 import Clothes.NotSimpleMenu.ScannerWrapper;
 import Clothes.Tshirt;
-
 import java.lang.reflect.Field;
 import java.util.List;
-
 
 
 public class ReflectionFactory  {
     private final List<Class<?>> classes;
     private ScannerWrapper sc = new ScannerWrapper();
 
+
     public ReflectionFactory(List<Class<?>> classes) {
         this.classes = classes;
     }
 
-    public Object create() {
+
+    public Object create() throws IllegalAccessException {
         System.out.println("Choose class");
         for (int i = 0; i < classes.size(); i++) {
             System.out.println((i + 1) + " " + classes.get(i).getSimpleName());
-            Tshirt tshirt = new Tshirt();
-            Jeans jeans = new Jeans();
         }
-        /*new ReflectionFactory(List.of(Tshirt.class, Jeans.class));
-        Tshirt.class.getFields();
-        Jeans.class.getFields();
-*/
-
-        Class C =getClass();
-            while (classes != null) {
+        new ReflectionFactory(List.of(Tshirt.class, Jeans.class));
+        int n = sc.nextInt();
+        Class C = classes.get(n);
                 System.out.println(C.getName());
                 C = C.getSuperclass();
                 Field[] fields = C.getFields();
@@ -38,20 +32,20 @@ public class ReflectionFactory  {
                     Class<?> fld = field.getType();
                     System.out.println("Class name:"+ field.getName());
                     System.out.println("Class type:"+ fld.getName());
-                }
 
-            }
+                    field.setAccessible(true);
+
+                    Object objectInstance = new Object();
+                    Object value = field.get(objectInstance);
+                    field.set(objectInstance, value);
+
+
+
+                }
             return null;
 
         }
 
     }
-
-
-//Поскольку в Java отсутствует множественное наследование,
-// то для получения всех предков следует рекурсивно вызвать метод getSuperclass() в цикле,
-// пока не будет достигнут Object, являющийся родителем всех классов. Object не имеет родителей,
-// поэтому вызов его метода getSuperclass() вернет null.
-
 
 
